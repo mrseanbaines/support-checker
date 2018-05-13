@@ -9,6 +9,7 @@ export default {
   name: 'App',
   created() {
     this.$store.dispatch('fetch');
+    this.$store.dispatch('fetchBrowsers');
   },
 };
 </script>
