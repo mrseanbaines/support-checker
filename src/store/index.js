@@ -18,25 +18,16 @@ export default new Vuex.Store({
         state.data.filter(prop => prop[1].stats[browser][version] === 'n'),
   },
   mutations: {
-    update(state, data) {
-      state.data = Object.entries(data);
-    },
-    updateBrowsers(state, data) {
-      state.browsers = Object.entries(data);
+    update(state, payload) {
+      state.data = Object.entries(payload.data);
+      state.browsers = Object.entries(payload.agents);
     },
   },
   actions: {
     fetch({ commit }) {
       Vue.http.get('https://raw.githubusercontent.com/Fyrd/caniuse/master/data.json').then(
         (response) => {
-          commit('update', response.body.data);
-        },
-      );
-    },
-    fetchBrowsers({ commit }) {
-      Vue.http.get('https://raw.githubusercontent.com/Fyrd/caniuse/master/data.json').then(
-        (response) => {
-          commit('updateBrowsers', response.body.agents);
+          commit('update', response.body);
         },
       );
     },
