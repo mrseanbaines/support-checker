@@ -4,25 +4,25 @@
     <form>
       <div v-if="browsers">
         <label>Browser</label>
-        <select v-model="selectedBrowser" @change="clearVersion" required>
+        <select v-model="selectedBrowser" @change="clear" required>
           <option disabled value="">Select a browser</option>
           <option
             v-for="browser in browsers"
-            :key="browser.abbr"
+            :key="browser[0]"
             :value="browser"
           >
-            {{ browser.browser }}
+            {{ browser[1].browser }}
           </option>
         </select>
-        <span>{{ selectedBrowser.browser }}</span>
+        <span v-if="selectedBrowser">{{ selectedBrowser[1].browser }}</span>
       </div>
 
       <div v-if="selectedBrowser">
         <label>Version</label>
-        <select v-if="selectedBrowser" v-model="browserVersion" required>
+        <select v-model="browserVersion" @change="getFiltered" required>
           <option disabled value="">Select a version</option>
           <option
-            v-for="version in filteredVersions.reverse()"
+            v-for="version in filteredVersions"
             :key="version"
             :value="version"
           >
@@ -31,9 +31,27 @@
         </select>
         <span>{{ browserVersion }}</span>
       </div>
-
-      <button v-if="browserVersion" type="submit">Submit</button>
     </form>
+
+    <div v-if="filteredProps">
+      <p>
+        <small>
+          {{ filteredProps.length }} results
+        </small>
+      </p>
+      <p>
+        <strong>
+          The following properties or features are not supported by
+          {{ selectedBrowser[1].browser }} {{ browserVersion }}:
+        </strong>
+      </p>
+      <p
+        v-for="prop in filteredProps"
+        :key="prop[0]"
+        >
+        {{ prop[1].title }}
+      </p>
+    </div>
 
   </div>
 </template>
@@ -48,6 +66,7 @@ export default {
     return {
       selectedBrowser: '',
       browserVersion: '',
+      filteredProps: null,
     };
   },
   name: 'Home',
@@ -55,14 +74,20 @@ export default {
     ...mapGetters([
       'data',
       'browsers',
+      'filteredData',
     ]),
     filteredVersions() {
-      return this.selectedBrowser.versions.filter(x => x !== null);
+      return this.selectedBrowser[1].versions.filter(x => x !== null).reverse();
     },
   },
   methods: {
-    clearVersion() {
+    clear() {
       this.browserVersion = '';
+      this.filteredProps = null;
+    },
+    getFiltered() {
+      this.filteredProps =
+        this.filteredData(this.selectedBrowser[0], this.browserVersion);
     },
   },
 };

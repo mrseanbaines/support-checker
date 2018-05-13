@@ -7,19 +7,22 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    data: [],
+    data: null,
     browsers: null,
   },
   getters: {
     data: state => state.data,
     browsers: state => state.browsers,
+    filteredData: state =>
+      (browser, version) =>
+        state.data.filter(prop => prop[1].stats[browser][version] === 'n'),
   },
   mutations: {
     update(state, data) {
-      state.data.push(data);
+      state.data = Object.entries(data);
     },
     updateBrowsers(state, data) {
-      state.browsers = Object.values(data);
+      state.browsers = Object.entries(data);
     },
   },
   actions: {
