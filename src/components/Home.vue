@@ -48,7 +48,7 @@
       <p
         v-for="prop in filteredProps"
         :key="prop[0]"
-        >
+      >
         {{ prop[1].title }}
       </p>
     </div>
