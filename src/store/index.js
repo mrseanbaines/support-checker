@@ -9,18 +9,18 @@ export default new Vuex.Store({
   state: {
     data: null,
     browsers: null,
+    categories: null,
   },
   getters: {
     data: state => state.data,
     browsers: state => state.browsers,
-    filteredData: state =>
-      (browser, version) =>
-        state.data.filter(prop => prop[1].stats[browser][version] === 'n'),
+    categories: state => state.categories,
   },
   mutations: {
     update(state, payload) {
       state.data = Object.entries(payload.data);
       state.browsers = Object.entries(payload.agents);
+      state.categories = Object.entries(payload.cats);
     },
   },
   actions: {
