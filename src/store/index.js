@@ -13,6 +13,7 @@ export default new Vuex.Store({
     selectedBrowser: '',
     selectedVersion: '',
     selectedCategories: [],
+    query: '',
   },
   getters: {
     data: state => state.data,
@@ -21,6 +22,7 @@ export default new Vuex.Store({
     selectedBrowser: state => state.selectedBrowser,
     selectedVersion: state => state.selectedVersion,
     selectedCategories: state => state.selectedCategories,
+    query: state => state.query,
   },
   mutations: {
     update(state, payload) {
@@ -46,6 +48,9 @@ export default new Vuex.Store({
       };
       state.selectedCategories = flattenArr(payload);
     },
+    setSearch(state, payload) {
+      state.query = payload;
+    },
   },
   actions: {
     fetch({ commit }) {
@@ -60,6 +65,9 @@ export default new Vuex.Store({
     },
     setCategories({ commit }, payload) {
       commit('setCategories', payload);
+    },
+    setSearch({ commit }, payload) {
+      commit('setSearch', payload);
     },
   },
 });

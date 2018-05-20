@@ -50,22 +50,28 @@ export default {
       'selectedVersion',
       'categories',
       'selectedCategories',
+      'query',
     ]),
     filteredProps() {
       const browser = this.selectedBrowser[0];
       const version = this.selectedVersion;
 
-      // console.log(this.data
-      //   .filter(prop => prop[1].stats[browser][version].includes('n'))
-      //   .filter(prop => prop[1].categories.some(x =>
-      //     this.selectedCategories.includes(x),
-      //   )),
-      // );
       return this.data
-        .filter(prop => prop[1].stats[browser][version].includes('n'))
-        .filter(prop => prop[1].categories.some(x =>
-          this.selectedCategories.includes(x),
-        ));
+        // Filter by browser & version
+        .filter(prop =>
+          prop[1].stats[browser][version].includes('n'),
+        )
+        // Filter by categories
+        .filter(prop =>
+          prop[1].categories.some(x =>
+            this.selectedCategories.includes(x),
+          ),
+        )
+        // Filter by search term
+        .filter(prop =>
+          prop[1].title.toLowerCase()
+            .includes(this.query.toLowerCase()),
+        );
     },
   },
 };

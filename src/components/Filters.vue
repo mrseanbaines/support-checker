@@ -60,6 +60,9 @@
       >
     </div>
 
+    <h4>Search</h4>
+    <input type="search" v-model="searchText" @keyup="setSearch">
+
   </div>
 </template>
 
@@ -74,6 +77,7 @@ export default {
       browser: '',
       version: '',
       filteredCategories: [],
+      searchText: '',
     };
   },
   name: 'Filters',
@@ -95,8 +99,10 @@ export default {
       });
     },
     setCategories() {
-      // console.log(this.filteredCategories);
       this.$store.dispatch('setCategories', this.filteredCategories);
+    },
+    setSearch() {
+      this.$store.dispatch('setSearch', this.searchText);
     },
   },
 };
