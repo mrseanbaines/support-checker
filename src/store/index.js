@@ -24,23 +24,9 @@ export default new Vuex.Store({
   },
   mutations: {
     update(state, payload) {
-      // const flattenArr = (arr) => {
-      //   const newArr = [];
-      //   for (let i = 0; i < arr.length; i += 1) {
-      //     for (let x = 0; x < arr[i].length; x += 1) {
-      //       newArr.push(arr[i][x]);
-      //     }
-      //   }
-      //   return newArr;
-      // };
-
       state.data = Object.entries(payload.data);
       state.browsers = Object.entries(payload.agents);
       state.categories = Object.entries(payload.cats);
-      // state.selectedCategories = flattenArr(
-      //   Object.entries(payload.cats).map(category => category[1]),
-      // );
-      // console.log(state.selectedCategories);
     },
     setSelected(state, payload) {
       Object.assign(state, payload);
@@ -59,7 +45,6 @@ export default new Vuex.Store({
         return newArr;
       };
       state.selectedCategories = flattenArr(payload);
-      // console.log(flattenArr(payload));
     },
   },
   actions: {
