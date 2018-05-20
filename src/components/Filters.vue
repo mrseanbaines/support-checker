@@ -24,7 +24,6 @@
     <div v-if="selectedBrowser">
       <label for="version">Version</label>
       <select
-        v-if="tick"
         id="version"
         required
         v-model="version"
@@ -48,6 +47,19 @@
       <span>{{ selectedVersion }}</span>
     </div>
 
+    <h4>Categories</h4>
+
+    <div v-for="category in categories" :key="category[0]">
+      <label :for="category[0]">{{ category[0] }}</label>
+      <input
+        v-model="filteredCategories"
+        :value="category[1]"
+        :id="category[0]"
+        type="checkbox"
+        @change="setCategories()"
+      >
+    </div>
+
   </div>
 </template>
 
@@ -61,7 +73,7 @@ export default {
     return {
       browser: '',
       version: '',
-      tick: true,
+      filteredCategories: [],
     };
   },
   name: 'Filters',
@@ -70,6 +82,7 @@ export default {
       'browsers',
       'selectedBrowser',
       'selectedVersion',
+      'categories',
     ]),
     filteredVersions() {
       return this.selectedBrowser[1].versions.filter(x => x !== null).reverse();
@@ -80,6 +93,10 @@ export default {
       this.$store.dispatch('setSelected', {
         [key]: value,
       });
+    },
+    setCategories() {
+      // console.log(this.filteredCategories);
+      this.$store.dispatch('setCategories', this.filteredCategories);
     },
   },
 };

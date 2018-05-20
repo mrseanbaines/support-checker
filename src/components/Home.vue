@@ -21,6 +21,11 @@
       >
         {{ prop[1].title }}
         <br>
+        <small v-for="(category, i) in prop[1].categories" :key="i">
+          {{ category }}{{ i &lt; prop[1].categories.length - 1 ? ', ' : '' }}
+        </small>
+        <br>
+        <br>
       </div>
     </div>
 
@@ -43,14 +48,24 @@ export default {
       'data',
       'selectedBrowser',
       'selectedVersion',
+      'categories',
+      'selectedCategories',
     ]),
     filteredProps() {
       const browser = this.selectedBrowser[0];
       const version = this.selectedVersion;
 
-      return this.data.filter(prop =>
-        prop[1].stats[browser][version].includes('n'),
-      );
+      // console.log(this.data
+      //   .filter(prop => prop[1].stats[browser][version].includes('n'))
+      //   .filter(prop => prop[1].categories.some(x =>
+      //     this.selectedCategories.includes(x),
+      //   )),
+      // );
+      return this.data
+        .filter(prop => prop[1].stats[browser][version].includes('n'))
+        .filter(prop => prop[1].categories.some(x =>
+          this.selectedCategories.includes(x),
+        ));
     },
   },
 };
