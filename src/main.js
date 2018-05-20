@@ -4,6 +4,9 @@ import App from './App';
 import router from './router';
 import store from './store';
 
+require('./assets/stylesheets/css/reset.css');
+require('./assets/stylesheets/css/application.css');
+
 Vue.use(VueResource);
 Vue.config.productionTip = false;
 

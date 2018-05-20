@@ -20,12 +20,11 @@
         :key="prop[0]"
       >
         {{ prop[1].title }}
-        <br>
-        <small v-for="(category, i) in prop[1].categories" :key="i">
-          {{ category }}{{ i &lt; prop[1].categories.length - 1 ? ', ' : '' }}
-        </small>
-        <br>
-        <br>
+        <p>
+          <small v-for="(category, i) in prop[1].categories" :key="i">
+            {{ category }}{{ i &lt; prop[1].categories.length - 1 ? ', ' : '' }}
+          </small>
+        </p>
       </div>
     </div>
 

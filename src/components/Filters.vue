@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <ul>
 
-    <div v-if="browsers">
+    <li v-if="browsers">
       <label for="browser">Browser</label>
       <select
         id="browser"
@@ -19,9 +19,9 @@
         </option>
       </select>
       <span v-if="selectedBrowser">{{ selectedBrowser[1].browser }}</span>
-    </div>
+    </li>
 
-    <div v-if="selectedBrowser">
+    <li v-if="selectedBrowser">
       <label for="version">Version</label>
       <select
         id="version"
@@ -45,25 +45,35 @@
         </option>
       </select>
       <span>{{ selectedVersion }}</span>
+    </li>
+
+    <div class="push-top">
+      <strong>
+        Categories
+      </strong>
     </div>
 
-    <h4>Categories</h4>
+    <li>
+      <ul>
+        <li v-for="category in categories" :key="category[0]">
+          <label :for="category[0]">{{ category[0] }}</label>
+          <input
+            v-model="filteredCategories"
+            :value="category[1]"
+            :id="category[0]"
+            type="checkbox"
+            @change="setCategories()"
+          >
+        </li>
+      </ul>
+    </li>
 
-    <div v-for="category in categories" :key="category[0]">
-      <label :for="category[0]">{{ category[0] }}</label>
-      <input
-        v-model="filteredCategories"
-        :value="category[1]"
-        :id="category[0]"
-        type="checkbox"
-        @change="setCategories()"
-      >
+    <div class="push-top">
+      <strong>Search</strong>
     </div>
-
-    <h4>Search</h4>
     <input type="search" v-model="searchText" @keyup="setSearch">
 
-  </div>
+  </ul>
 </template>
 
 <script>
