@@ -2,7 +2,11 @@
   <ul>
 
     <li v-if="browsers">
-      <label for="browser">Browser</label>
+      <label for="browser">
+        <strong>
+          Browser
+        </strong>
+      </label>
       <select
         id="browser"
         required
@@ -18,11 +22,14 @@
           {{ browser[1].browser }}
         </option>
       </select>
-      <span v-if="selectedBrowser">{{ selectedBrowser[1].browser }}</span>
     </li>
 
-    <li v-if="selectedBrowser">
-      <label for="version">Version</label>
+    <li class="push-top" v-if="selectedBrowser">
+      <label for="version">
+        <strong>
+          Version
+        </strong>
+      </label>
       <select
         id="version"
         required
@@ -44,19 +51,17 @@
           {{ version }}
         </option>
       </select>
-      <span>{{ selectedVersion }}</span>
     </li>
 
-    <div class="push-top">
+    <li class="push-top">
       <strong>
         Categories
       </strong>
-    </div>
+    </li>
 
     <li>
       <ul>
         <li v-for="category in categories" :key="category[0]">
-          <label :for="category[0]">{{ category[0] }}</label>
           <input
             v-model="filteredCategories"
             :value="category[1]"
@@ -64,14 +69,25 @@
             type="checkbox"
             @change="setCategories()"
           >
+          <label :for="category[0]">{{ category[0] }}</label>
         </li>
       </ul>
     </li>
 
-    <div class="push-top">
-      <strong>Search</strong>
-    </div>
-    <input type="search" v-model="searchText" @keyup="setSearch">
+    <li class="push-top">
+      <label for="search">
+        <strong>
+          Search
+        </strong>
+      </label>
+      <input
+        id="search"
+        type="search"
+        v-model="searchText"
+        @keyup="setSearch"
+        placeholder="Filter by title"
+      >
+    </li>
 
   </ul>
 </template>
