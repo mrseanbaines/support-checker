@@ -6,7 +6,8 @@
     <div v-if="selectedVersion">
       <p class="push-top">
         <small>
-          {{ filteredProps.length }} results
+          {{ filteredProps.length }}
+          {{ filteredProps.length > 1 ? 'results' : 'result' }}
         </small>
       </p>
       <p>
@@ -17,13 +18,14 @@
       </p>
       <ul>
         <li
+          class="with-border-top pad-top"
           v-for="prop in filteredProps"
           :key="prop[0]"
         >
-          {{ prop[1].title }}
+          <a>{{ prop[1].title }}</a>
           <p>
             <small v-for="(category, i) in prop[1].categories" :key="i">
-              {{ category }}{{ i &lt; prop[1].categories.length - 1 ? ', ' : '' }}
+              {{ category }}{{ i !== prop[1].categories.length - 1 ? ', ' : '' }}
             </small>
           </p>
         </li>
@@ -65,7 +67,8 @@ export default {
         // Filter by categories
         .filter(prop =>
           prop[1].categories.some(x =>
-            this.selectedCategories.includes(x),
+            this.selectedCategories.includes(x) ||
+            this.selectedCategories.length === 0,
           ),
         )
         // Filter by search term

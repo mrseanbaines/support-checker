@@ -62,14 +62,15 @@
     <li>
       <ul>
         <li v-for="category in categories" :key="category[0]">
-          <input
-            v-model="filteredCategories"
-            :value="category[1]"
-            :id="category[0]"
-            type="checkbox"
-            @change="setCategories()"
-          >
-          <label :for="category[0]">{{ category[0] }}</label>
+          <label>
+            <input
+              v-model="filteredCategories"
+              :value="category[1]"
+              type="checkbox"
+              @change="setCategories"
+            >
+            <span class="checkbox-label">{{ category[0] }}</span>
+          </label>
         </li>
       </ul>
     </li>
@@ -84,8 +85,9 @@
         id="search"
         type="search"
         v-model="searchText"
-        @keyup="setSearch"
+        @input="setSearch"
         placeholder="Filter by title"
+        autocomplete="off"
       >
     </li>
 
@@ -113,6 +115,7 @@ export default {
       'selectedBrowser',
       'selectedVersion',
       'categories',
+      'selectedCategories',
     ]),
     filteredVersions() {
       return this.selectedBrowser[1].versions.filter(x => x !== null).reverse();

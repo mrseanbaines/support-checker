@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900');
 
+html,
 body {
-  margin: 10px;
   font-family: 'Roboto', sans-serif;
   font-size: 14px;
   font-weight: 400;
@@ -9,6 +9,28 @@ body {
   color: #666;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: #eee;
+  height: 100%;
+}
+
+#app {
+  max-width: 960px;
+  background: #fff;
+  margin: 0 auto;
+  min-height: 100%;
+  padding: 40px;
+}
+
+a {
+  color: #9c88ff;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+a:hover,
+a:focus,
+a:active {
+  color: #8c7ae6;
 }
 
 small {
@@ -34,19 +56,43 @@ h4 {
   margin-top: 10px;
 }
 
-input[type=text],
-input[type=email],
-input[type=search] {
-  border: 1px solid #ccc;
-  outline: none;
-  padding: 8px;
-  border-radius: 3px;
+.pad-top {
+  padding-top: 10px;
 }
 
 input[type=text],
 input[type=email],
 input[type=search],
 select {
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  outline: none;
+  padding: 8px;
   display: block;
   min-width: 200px;
+  -webkit-appearance: none;
+  appearance: none;
+  background: #fff;
+}
+
+input[type=text]:focus,
+input[type=email]:focus,
+input[type=search]:focus,
+select:focus {
+  border-color: #9c88ff;
+}
+
+.checkbox-label {
+  cursor: pointer;
+}
+
+.checkbox-label:hover,
+input[type=checkbox]:focus + .checkbox-label,
+input[type=checkbox]:hover + .checkbox-label,
+input[type=checkbox]:checked + .checkbox-label {
+  color: #9c88ff;
+}
+
+.with-border-top {
+  border-top: 1px solid #ddd;
 }
