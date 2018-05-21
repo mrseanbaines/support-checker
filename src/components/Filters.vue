@@ -126,6 +126,9 @@ export default {
       this.$store.dispatch('setSelected', {
         [key]: value,
       });
+      if (key === 'selectedBrowser') {
+        this.version = '';
+      }
     },
     setCategories() {
       this.$store.dispatch('setCategories', this.filteredCategories);
