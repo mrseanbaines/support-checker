@@ -37,16 +37,9 @@ export default new Vuex.Store({
       }
     },
     setCategories(state, payload) {
-      const flattenArr = (arr) => {
-        const newArr = [];
-        for (let i = 0; i < arr.length; i += 1) {
-          for (let x = 0; x < arr[i].length; x += 1) {
-            newArr.push(arr[i][x]);
-          }
-        }
-        return newArr;
-      };
-      state.selectedCategories = flattenArr(payload);
+      state.selectedCategories = payload.reduce((accumulator, currentValue) =>
+        accumulator.concat(currentValue), [],
+      );
     },
     setSearch(state, payload) {
       state.query = payload;
