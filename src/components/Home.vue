@@ -23,9 +23,14 @@
           :key="prop[0]"
         >
           <a>{{ prop[1].title }}</a>
-          <p>
+          <div>
             <small v-for="(category, i) in prop[1].categories" :key="i">
               {{ category }}{{ i !== prop[1].categories.length - 1 ? ', ' : '' }}
+            </small>
+          </div>
+          <p>
+            <small>
+              {{ statuses[prop[1].status] }}
             </small>
           </p>
         </li>
@@ -49,6 +54,7 @@ export default {
   computed: {
     ...mapGetters([
       'data',
+      'statuses',
       'selectedBrowser',
       'selectedVersion',
       'categories',

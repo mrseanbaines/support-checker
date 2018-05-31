@@ -9,6 +9,7 @@ export default new Vuex.Store({
   state: {
     data: null,
     browsers: null,
+    statuses: null,
     categories: null,
     selectedBrowser: '',
     selectedVersion: '',
@@ -18,6 +19,7 @@ export default new Vuex.Store({
   getters: {
     data: state => state.data,
     browsers: state => state.browsers,
+    statuses: state => state.statuses,
     categories: state => state.categories,
     selectedBrowser: state => state.selectedBrowser,
     selectedVersion: state => state.selectedVersion,
@@ -28,6 +30,7 @@ export default new Vuex.Store({
     update(state, payload) {
       state.data = Object.entries(payload.data);
       state.browsers = Object.entries(payload.agents);
+      state.statuses = payload.statuses;
       state.categories = Object.entries(payload.cats);
     },
     setSelected(state, payload) {
