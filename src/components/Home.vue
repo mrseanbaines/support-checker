@@ -74,6 +74,8 @@ export default {
         // Filter by search term
         .filter(prop =>
           prop[1].title.toLowerCase()
+            .includes(this.query.toLowerCase()) ||
+          prop[1].keywords.toLowerCase()
             .includes(this.query.toLowerCase()),
         );
     },

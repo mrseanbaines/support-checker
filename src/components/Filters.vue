@@ -86,7 +86,7 @@
         type="search"
         v-model="searchText"
         @input="setSearch"
-        placeholder="Filter by title"
+        placeholder="Filter by title or keyword"
         autocomplete="off"
       >
     </li>
